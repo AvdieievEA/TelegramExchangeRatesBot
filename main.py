@@ -6,7 +6,6 @@ import requests
 from time import time
 import io
 import os
-import pprint
 
 
 bot = telebot.TeleBot(os.environ["TOKEN"])
@@ -109,7 +108,6 @@ def list_exchange(message):
         response = cached(ttl_s=600)(requests.get)(url_historical, headers=headers, params=querystring).json()["rates"]
         historical_data[date] = {currency: response[currency]}
     coords = {date.day: exchange_rate for date, rate in historical_data.items() for exchange_rate in rate.values()}
-    print(list(coords.keys()))
     fig = plt.figure()
     plt.plot(list(coords.keys()), list(coords.values()))
     plt.xlabel("День в текущем месяце")
