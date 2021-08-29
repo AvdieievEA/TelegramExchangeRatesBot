@@ -113,7 +113,8 @@ def list_exchange(message):
     plt.xlabel("День в текущем месяце")
     plt.ylabel(f"Курс {currency}")
     plt.title(f"Курс USD/{currency}")
-    fig.savefig(file := io.BytesIO())
+    file = io.BytesIO()
+    fig.savefig(file)
     file.seek(0)
     bot.send_photo(message.chat.id, file)
 
